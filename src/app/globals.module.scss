@@ -1,0 +1,115 @@
+$primary: #006eb5;
+$primary-light: #52cfe5;
+$primary-dark: #005e9b;
+$secondary: #14b09d;
+$text: #323130;
+$white: #fff;
+$gray-50: #fcfcfc;
+$gray-100: #fafafa;
+$gray-150: #f8f8f8;
+$gray-200: #f5f5f5;
+$gray-300: #e5e5e5;
+$gray-400: #d9d9d9;
+$gray-450: #d4d4d4;
+$gray-470: #a8a29e;
+$gray-475: #a3a3a3;
+$gray-500: #787878;
+$gray-550: #737373;
+$gray-575: #5a5a59;
+$gray-600: #525252;
+$gray-650: #475569;
+$gray-700: #404040;
+$gray-750: #4f4f4f;
+$gray-800: #3f3f3f;
+$gray-900: #262626;
+
+$small-min-h: 400px;
+$small-max: 479px;
+$max-width-mini-mobile: 290px;
+$max-width-mobile: 768px;
+$max-width-tablet: 1024px;
+$max-width-large-tablet: 1300px;
+
+@mixin font($fontSize, $fontColor, $lineHeight, $fontWeight) {
+  font-size: $fontSize;
+  color: $fontColor;
+  line-height: $lineHeight;
+  font-weight: $fontWeight;
+}
+
+.body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  background-color: $gray-150;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  :global(.app):has(header):has(footer) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: $gray-150;
+    // background-image: url("../images/page-background.svg");
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: top;
+    justify-content: space-between;
+
+    @media screen and (max-width: $max-width-tablet) {
+      display: block;
+    }
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 64px;
+    flex: 1;
+  }
+
+  button {
+    font-family: "Lato", sans-serif;
+    font-style: normal;
+
+    &:not(:disabled) {
+      cursor: pointer;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  input[type="text"] {
+    font-size: 16px;
+  }
+
+  :global {
+    .ms-Pivot {
+      border-bottom: 1px solid $gray-300;
+
+      button[type="button"] {
+        padding: 0 4px;
+
+        &[aria-selected="true"] span {
+          color: $primary;
+        }
+
+        :not(.is-selected) {
+          color: $gray-600;
+          font-weight: 600;
+        }
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}

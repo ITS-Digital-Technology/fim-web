@@ -1,0 +1,116 @@
+parameters:
+  - name: buildType
+    displayName: Build type
+    type: string
+    default: dev
+    values:
+      - dev
+      - test
+      - prod
+
+name: ${{ parameters.buildType }}_$(versionName)
+
+variables:
+  # versionPrefix - represents the prefix for version name, e.g. 0.1, which is transformed into e.g. 0.1.123
+
+  prefix: $[ coalesce(variables.versionPrefix , '0.0') ]
+  versionCounter: $[ counter(variables.prefix, 0) ] # whenever prefix changes, counter is automatically reset to 0
+  versionName: $[ coalesce(variables.overrideVersionName , format('{0}.{1}', variables.prefix, variables.versionCounter)) ]
+
+  ${{ if eq(parameters.buildType, 'dev') }}:
+    azureServiceConnection: FIM Web CI/CD Service Connection - Dev
+  ${{ if in(parameters.buildType, 'test', 'uat') }}:
+    azureServiceConnection: fimweb_cicd_test
+  ${{ if eq(parameters.buildType, 'prod') }}:
+    azureServiceConnection: FIM Web CI/CD Service Connection - Prod
+
+  artifactName: cxdashboard_web
+
+trigger:
+  - develop
+pr:
+  - develop
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        pool:
+          vmImage: ubuntu-latest
+
+        variables:
+          - group: cxdashboard-web-${{ parameters.buildType }}
+
+        steps:
+          ######### Prepare #########
+          - task: Npm@1
+            displayName: npm install
+            inputs:
+              command: custom
+              verbose: false
+              customCommand: install
+
+          ######### Build #########
+          - task: Npm@1
+            displayName: npm build
+            inputs:
+              command: custom
+              verbose: false
+              customCommand: run build
+
+          ######### Archive files #########
+          - task: CopyFiles@2
+            displayName: Copy dist folder
+            inputs:
+              SourceFolder: $(System.DefaultWorkingDirectory)/dist
+              TargetFolder: drop/dist
+
+          - task: CopyFiles@2
+            displayName: Copy serve config
+            inputs:
+              Contents: $(System.DefaultWorkingDirectory)/serve.json
+              TargetFolder: drop/dist
+
+          - task: ArchiveFiles@2
+            displayName: Archive files
+            inputs:
+              rootFolderOrFile: $(System.DefaultWorkingDirectory)/drop
+              includeRootFolder: false
+              archiveFile: $(Build.ArtifactStagingDirectory)/$(artifactName).zip
+
+          ######### Artifacts #########
+          - publish: $(Build.ArtifactStagingDirectory)/$(artifactName).zip
+            displayName: Publish artifact
+            artifact: drop
+
+  - stage: Deploy
+    dependsOn: Build
+    condition: and(succeeded(), ne(variables['Build.Reason'],'PullRequest'))
+
+    jobs:
+      - deployment: Deploy
+        pool:
+          vmImage: ubuntu-latest
+
+        environment: cxdashboard-web-${{ parameters.buildType }}
+
+        variables:
+          - group: cxdashboard-web-${{ parameters.buildType }}
+
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  displayName: Download ZIP
+                  artifact: drop # explicitly downloading 'drop' artifact to ignore code coverage artifact
+
+                  ######### React Frontend #########
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: $(azureServiceConnection)
+                    appType: webAppLinux
+                    appName: $(targetAppService)
+                    package: $(Pipeline.Workspace)/drop/$(artifactName).zip
+                    deploymentMethod: auto
+                    startUpCommand: "npx --yes serve@14.2.1 dist -p 8080"

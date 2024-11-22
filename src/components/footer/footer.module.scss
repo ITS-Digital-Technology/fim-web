@@ -1,0 +1,14 @@
+@import "@/app/globals.module.scss";
+
+.footer {
+  .localFooter {
+    padding: 16px;
+    margin: 0;
+    background: $gray-900;
+    @include font(12px, $gray-300, 16px, 400);
+
+    @media screen and (min-width: $max-width-tablet) {
+      padding: 18px 64px;
+    }
+  }
+}
