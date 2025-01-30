@@ -1,0 +1,110 @@
+@import '@/app/globals.module.scss';
+
+.main {
+    background-color: $white;
+    margin: 20px 0 32px;
+    padding: 20px;
+
+    &.hasBottomRow {
+        padding: 20px 0 0;
+
+        .row {
+            padding: 0 20px;
+        }
+    }
+
+    .row {
+        display: flex;
+        gap: 8px;
+
+        p {
+            margin: 0;
+        }
+
+        h3 {
+            @include font(14px, $black, 16px, 550);
+            margin: 0;
+        }
+    }
+}
+
+.bottomRow {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: $mint;
+    flex-direction: row-reverse;
+
+    .viewAllButton {
+        @extend .primaryButton;
+        display: flex;
+
+        &:focus-visible {
+            padding: 7px 13px;
+            margin: 2px;
+            outline: transparent;
+            box-shadow: 0 0 0 2px $primary;
+            border: solid 1px $white;
+            border-radius: 4px;
+            inset: 10px;
+        }
+    }
+
+}
+
+.contentWrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+
+    @include mobile-width() {
+        width: 90vw;
+    }
+}
+
+.iconWrapper {
+    min-width: 45px;
+    min-height: 35px;
+    background: url('../../../images/IconBackground.svg') no-repeat center center;
+}
+
+.iconStyles {
+    color: $primary;
+}
+
+.footerStackStyles {
+    background-color: $mint;
+    padding: 15px 20px;
+}
+
+.contentStackStyles {
+    padding: 25px 20px;
+}
+
+.tagCategory {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 0 20px;
+    align-items: center;
+    gap: 20px;
+
+    .tagCategoryName {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .tags {
+        grid-column-start: 2;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        span {
+            background-color: $lime;
+            border-radius: 10px;
+            padding: 6px 8px;
+        }
+    }
+}

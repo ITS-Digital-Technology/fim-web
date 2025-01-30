@@ -1,0 +1,76 @@
+@import '@/app/globals.module.scss';
+
+.modalMain {
+    background: $white;
+    max-width: 640px;
+    height: auto;
+    max-height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2px;
+    padding: 24px 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    @extend .customScrollbar;
+
+    @include mobile-width {
+        width: 85vw;
+        max-height: calc(100lvh - 32px);
+        top: 16px;
+    }
+}
+
+.centerContent {
+    text-align: center;
+
+    h2 {
+        text-align: center;
+        margin: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $gray-400;
+    }
+}
+
+.row {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.container {
+    max-height: 100%;
+}
+
+.dialogTitle {
+    color: $primary;
+    margin: 0;
+    @include font(28px, $primary, 34px, 400);
+}
+
+.closeButton {
+    @extend .secondaryButton;
+    display: block;
+    float: right;
+    margin-bottom: 0;
+    padding: 0;
+    height: 30px;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: auto;
+    }
+}
+
+@media screen and (max-height: $small-min-h) {
+    .modalMain {
+        padding: 8px;
+        .row {
+            margin-top: 0;
+        }
+    }
+}

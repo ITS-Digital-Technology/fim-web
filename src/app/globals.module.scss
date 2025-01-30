@@ -1,115 +1,304 @@
+// @import '@/src/fonts/fonts.scss';
+
 $primary: #006eb5;
 $primary-light: #52cfe5;
+$primary-lightest: #b3d1f2;
+$primary-background: #80b7da;
 $primary-dark: #005e9b;
 $secondary: #14b09d;
 $text: #323130;
+
 $white: #fff;
 $gray-50: #fcfcfc;
 $gray-100: #fafafa;
 $gray-150: #f8f8f8;
 $gray-200: #f5f5f5;
+$gray-250: #f3f4f6;
 $gray-300: #e5e5e5;
 $gray-400: #d9d9d9;
 $gray-450: #d4d4d4;
+$gray-460: #c5c3bf;
 $gray-470: #a8a29e;
 $gray-475: #a3a3a3;
+$gray-490: #d3d3d3;
 $gray-500: #787878;
 $gray-550: #737373;
 $gray-575: #5a5a59;
+$gray-590: #575757;
 $gray-600: #525252;
 $gray-650: #475569;
 $gray-700: #404040;
 $gray-750: #4f4f4f;
 $gray-800: #3f3f3f;
 $gray-900: #262626;
+$gray-950: #333333;
+$gray-warm-200: #e7e5e4;
+$black: #000;
+$transparent-5: rgba(0, 0, 0, 0.05);
+$transparent-10: rgba(0, 0, 0, 0.1);
+$transparent-40: rgba(0, 0, 0, 0.4);
+$transparent-60: rgba(0, 0, 0, 0.6);
+$transparent-90: rgba(0, 0, 0, 0.9);
 
-$small-min-h: 400px;
-$small-max: 479px;
+$gray-cool: #64748b;
+$orange-50: #fff5eb;
+$orange-300: #fcb169;
+$yellow: #fac515;
+$yellow-light: #fef8bb;
+$blue-600: #3182ce;
+$blue-900: #385775;
+$red: #d41b2c;
+$red-100: #c8102e;
+$red-500: #ec3b4d;
+$red-light: #fcd4d4;
+$red-dark: #f66574;
+$green: #08cfb5;
+$workstudy-blue: #e3e9f5;
+$gray-blue: #f5faff;
+$mint: #ccf5f0;
+$cyan: #14b09d;
+$teal: #029ba7;
+$turquoise: rgba(0, 207, 181, 0.2);
+$lime: #badb00;
+$teal-50: #eefdfa;
+$light-blue: #f5faff;
+$bayern-blue: #1c7382;
+$green-light: #c5fbef;
+$green-dark: #28ceb8;
+$wellness-border: #b1e7ec;
+$wellness-blue: #d8f1f3;
+$lime: #badb00;
+$orange: #ff854f;
+
 $max-width-mini-mobile: 290px;
 $max-width-mobile: 768px;
 $max-width-tablet: 1024px;
 $max-width-large-tablet: 1300px;
 
-@mixin font($fontSize, $fontColor, $lineHeight, $fontWeight) {
-  font-size: $fontSize;
-  color: $fontColor;
-  line-height: $lineHeight;
-  font-weight: $fontWeight;
-}
+$small-min-h: 400px;
+$small-max: 479px;
+$medium-min: 480px;
+$medium-max: 639px;
+$medium-large-min: 640px;
+$medium-large-max: 879px;
+$large-min: 880px;
+$large-max: 1023px;
+$large-large-min: 1024px;
+
+$header-height: 156px;
+$footer-height: 206px;
+$smaller-footer-height: 154px;
 
 .body {
-  margin: 0;
-  padding: 0;
-  font-family: "Lato", sans-serif;
-  font-style: normal;
-  background-color: $gray-150;
-  text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  :global(.app):has(header):has(footer) {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: $gray-150;
-    // background-image: url("../images/page-background.svg");
-    background-size: cover;
-    background-position-x: center;
-    background-position-y: top;
-    justify-content: space-between;
-
-    @media screen and (max-width: $max-width-tablet) {
-      display: block;
-    }
-  }
-
-  main {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 64px;
-    flex: 1;
-  }
-
-  button {
-    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
     font-style: normal;
+    background-color: $gray-150;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 
-    &:not(:disabled) {
-      cursor: pointer;
+    main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 64px;
+        flex: 1;
+        background-color: $gray-150;
+        background-image: url('../images/page-background.svg');
+        background-size: cover;
+        background-position: center;
+        min-height: calc(100lvh - $header-height - $footer-height);
     }
-  }
 
-  a {
+    button {
+        font-family: 'Lato', sans-serif;
+        font-style: normal;
+
+        &:not(:disabled) {
+            cursor: pointer;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    input[type='text'] {
+        font-size: 16px;
+    }
+
+    div[role='tablist'] {
+        border-bottom: 1px solid $gray-300;
+
+        button[type='button'] {
+            padding: 0 4px;
+
+            &[aria-selected='true'] span {
+                color: $primary;
+            }
+
+            :not(.is-selected) {
+                color: $gray-600;
+                font-weight: 600;
+            }
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+}
+
+@mixin tablet-width-or-zoom {
+    @media screen and (max-width: $max-width-large-tablet) {
+        @content;
+    }
+}
+
+@mixin mobile-width {
+
+    @media screen and (max-width: $max-width-mobile),
+    (hover: none) and (max-width: $max-width-tablet) {
+        @content;
+    }
+}
+
+@mixin mini-mobile-width {
+    @media screen and (max-width: $max-width-mini-mobile) {
+        @content;
+    }
+}
+
+@mixin font($fontSize, $fontColor, $lineHeight, $fontWeight) {
+    font-size: $fontSize;
+    color: $fontColor;
+    line-height: $lineHeight;
+    font-weight: $fontWeight;
+}
+
+@mixin card {
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+    background-color: $white;
+}
+
+.primaryButton {
+    @include font(14px, $white, 20px, 500);
+    border: none;
+    background-color: $primary;
+    color: $white;
+    padding: 10px 16px;
+    border-radius: 4px;
     text-decoration: none;
-  }
 
-  input[type="text"] {
-    font-size: 16px;
-  }
+    &:hover {
+        background-color: $primary;
+        opacity: 0.9;
+        text-decoration: underline;
+    }
 
-  :global {
-    .ms-Pivot {
-      border-bottom: 1px solid $gray-300;
-
-      button[type="button"] {
-        padding: 0 4px;
-
-        &[aria-selected="true"] span {
-          color: $primary;
-        }
-
-        :not(.is-selected) {
-          color: $gray-600;
-          font-weight: 600;
-        }
+    &:disabled {
+        background-color: $gray-300;
+        color: $gray-470;
 
         &:hover {
-          background-color: transparent;
+            opacity: 1;
+            text-decoration: none;
         }
-      }
     }
+}
+
+.secondaryButton {
+    @include font(14px, $primary, 20px, 500);
+    border: none;
+    background-color: $white;
+    border-radius: 4px;
+    padding: 10px 16px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: $gray-200;
+        text-decoration: underline;
+    }
+}
+
+.tertiaryButton {
+    @extend .secondaryButton;
+    display: flex;
+    border: 1px solid $primary;
+    background-color: transparent;
+    padding: 9px 15px;
+    @include font(14px, $primary, 20px, 400);
+
+    &:hover {
+        background: none;
+    }
+}
+
+.customScrollbar {
+    &::-webkit-scrollbar {
+        width: 3px;
+        height: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $gray-300;
+        width: 3px;
+        height: 3px;
+        border-radius: 50px;
+    }
+}
+
+.screenReaderText {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    word-wrap: normal !important;
+}
+
+:export {
+    primary: $primary;
+    secondary: $secondary;
+    gray150: $gray-150;
+    gray300: $gray-300;
+    gray450: $gray-450;
+    white: $white;
+    black: $black;
+    mint: $mint;
+    smallMax: $small-max;
+    mediumLargeMin: $medium-large-min;
+    mediumLargeMax: $medium-large-max;
+    maxWidthTablet: $max-width-tablet;
+}
+
+
+$max-width-mini-mobile: 290px;
+$max-width-mobile: 768px;
+$max-width-tablet: 1024px;
+$max-width-large-tablet: 1300px;
+@mixin mobile-width {
+
+  @media screen and (max-width: $max-width-mobile),
+  (hover: none) and (max-width: $max-width-tablet) {
+      @content;
+  }
+}
+
+@mixin mini-mobile-width {
+  @media screen and (max-width: $max-width-mini-mobile) {
+      @content;
   }
 }

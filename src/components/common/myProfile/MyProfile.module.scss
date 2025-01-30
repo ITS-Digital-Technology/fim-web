@@ -1,0 +1,49 @@
+@import '@/app/globals.module.scss';
+
+
+
+.main {
+    margin-top: 70px;
+    display: flex;
+    gap: 32px;
+    width: 100%;
+    padding-bottom: 64px;
+
+    @include tablet-width-or-zoom() {
+        flex-direction: column;
+    }
+
+    .profileAndNav {
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+        width: 420px;
+
+        @include tablet-width-or-zoom() {
+            margin: 0 auto;
+            width: auto;
+        }
+
+        @include mobile-width() {
+            gap: 16px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            width: 190px;
+            gap: 24px;
+        }
+
+        .studentGreeting {
+            gap: 5px;
+            margin-bottom: 24px;
+
+            @include font(16px, $black, 24px, 400);
+
+            .studentName {
+                @include font(28px, $black, 20px, 600);
+            }
+        }
+    }
+}

@@ -1,0 +1,46 @@
+@import '@/app/globals.module.scss';
+
+.dialogWrapper {
+    padding: 24px 0 0;
+    max-height: 100%;
+}
+
+.buttonRow {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    bottom: 0;
+    background: $white;
+    padding: 20px 0;
+}
+
+.buttonRowRight {
+    @extend .buttonRow;
+    justify-content: right;
+}
+
+.actionButton {
+    @extend .primaryButton;
+}
+
+.cancelButton {
+    @extend .secondaryButton;
+}
+
+.subText {
+    @include font(12px, $gray-550, 16px, 700);
+}
+
+.noScrollBody {
+    overflow: hidden;
+}
+
+@media screen and (max-height: $small-min-h) {
+    .dialogWrapper,
+    .buttonRow {
+        padding: 8px 0;
+    }
+}

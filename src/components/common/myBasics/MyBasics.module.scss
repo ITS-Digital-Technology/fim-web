@@ -1,0 +1,54 @@
+@import '@/app/globals.module.scss';
+
+.main {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+
+    @include mobile-width() {
+        width: 90vw;
+    }
+}
+
+.info {
+    padding-bottom: 12px;
+    max-width: 380px;
+    @include font(12px, $black, 16px, 400);
+
+    svg {
+        position: relative;
+        top: 4px;
+    }
+}
+
+.rowTitle {
+    @include font(16px, $black, 24px, 400);
+    margin-bottom: 4px;
+}
+
+.rowContent {
+    @include font(16px, $black, 24px, 700);
+}
+
+.text {
+    max-width: 100%;
+    text-overflow: ellipsis;
+
+    p {
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+.iconText {
+    @extend .text;
+    max-width: 85%;
+}
+
+.iconContainer {
+    svg {
+        padding: 10px 14px;
+        width: 16px;
+        height: 16px;
+    }
+}

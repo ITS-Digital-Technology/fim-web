@@ -1,0 +1,13 @@
+@import '@/app/globals.module.scss';
+
+.margin {
+    margin: 0 0 0 10px;
+}
+
+.error {
+    color: red;
+}
+
+.saved {
+    color: $green-dark;
+}
