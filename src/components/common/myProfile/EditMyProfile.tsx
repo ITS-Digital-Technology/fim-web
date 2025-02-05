@@ -13,20 +13,21 @@ import TextInputSection from './TextInputSection'
 import styles from './MyProfile.module.scss'
 // import { MePageContext } from '@/app/contexts/MePageContext'
 import {MockMeData} from '../../../mocks/User'
+import { UserContext } from '@/app/contexts/UserContext'
 
 const EditMyProfile: React.FC = () => {
     // const { profileInfo, updateProfileProperty } = useContext(MyProfileContext)
     // const { fetchMePageData } = useContext(MePageContext)
-    const profileInfo = MockMeData
+    const profileInfo = useContext(UserContext)
     const [statement, setStatement] = useState(
-        profileInfo?.aboutMe.personalStatement ?? ''
+        profileInfo?.email?? ''
     )
     const [messageState, setMessageState] = useState<MessageState>(
         MessageState.Hidden
     )
     useEffect(() => {
-        if (profileInfo?.aboutMe.personalStatement) {
-            setStatement(profileInfo.aboutMe.personalStatement)
+        if (profileInfo?.email) {
+            setStatement(profileInfo.email)
         }
     }, [profileInfo])
 

@@ -1,0 +1,211 @@
+@import "@/app/globals.module.scss";
+
+.addPostModal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $primary;
+  padding: 0px 1rem;
+}
+
+.closeIcon {
+  @include font(calc(20rem / 16), $black, calc(24rem / 16), 600);
+}
+.addPostModalHeader {
+  font-size: calc(22rem / 16);
+  font-weight: 600;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.addPostModalScrollableContent {
+  max-width: 575px;
+  width: 90vw;
+  max-height: 80vh;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  padding: 16px;
+}
+
+.postAddSection {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  .inputRow {
+    margin: 5px 0;
+
+    .text {
+      margin: 10px 0;
+
+      .messageText {
+        font-size: calc(12rem / 16);
+        color: $gray-590;
+        margin-top: 5px;
+      }
+
+      .postFormTooltipIcon {
+        margin: 1px 5px;
+        font-size: calc(16rem / 16);
+        position: relative;
+      }
+    }
+
+    input:disabled {
+      opacity: 1;
+    }
+  }
+
+  .buttonSection {
+    display: block;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .errorMessage {
+    color: $red-100;
+    font-size: calc(14rem / 16);
+  }
+
+  .blueLink {
+    text-decoration: none;
+    color: $primary;
+  }
+
+  .thumbnailContainer {
+    display: flex;
+    margin-top: 20px;
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .defaultThumbnail {
+    background: $bayern-blue;
+    color: $white;
+    font-size: calc(16rem / 16);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .defaultThumbnailIcon {
+      font-size: calc(22rem / 16);
+    }
+  }
+
+  .choiceGroup {
+    label {
+      span {
+        -webkit-text-size-adjust: "none";
+        font-size: calc(14rem / 16);
+      }
+    }
+  }
+}
+
+.addBlogModal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $primary;
+  padding: 0px 1rem;
+}
+
+.addBlogModalHeader {
+  font-size: calc(22rem / 16);
+  font-weight: 600;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.addBlogModalScrollableContent {
+  max-width: 575px;
+  width: 90vw;
+  max-height: 80vh;
+}
+
+.blogAddSection {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  .inputRow {
+    margin: 5px 0;
+
+    .text {
+      margin: 10px 0;
+
+      .messageText {
+        margin-top: 5px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .inputMargin {
+      margin-bottom: 35px;
+    }
+
+    .deleteBlogIcon {
+      font-size: calc(20rem / 16);
+      cursor: pointer;
+      margin-top: 6px;
+    }
+  }
+
+  .buttonSection {
+    display: block;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .errorMessage {
+    color: $red-100;
+    font-size: calc(14rem / 16);
+    margin-bottom: 5px;
+  }
+
+  .blueLink {
+    text-decoration: none;
+    color: $primary;
+  }
+}
+
+.cancelButtonStyles {
+  background-color: $white;
+  color: $primary;
+  width: 120px;
+  margin: 0 15px;
+  height: 35px;
+  font-size: calc(16rem / 16);
+  letter-spacing: 0.2px;
+  border: none;
+}
+
+.okButtonStyles {
+  background-color: $primary;
+  color: $white;
+  width: 130px;
+  min-width: 80px;
+  margin: 0 15px;
+  height: 35px;
+  font-size: calc(16rem / 16);
+  letter-spacing: 0.2px;
+}
+.actionButtonStyles {
+  color: $primary;
+  font-size: calc(14rem / 16);
+  letter-spacing: 0.2px;
+  &:hover {
+    color: $primary;
+  }
+}

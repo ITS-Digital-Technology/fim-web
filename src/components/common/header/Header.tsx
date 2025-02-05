@@ -6,7 +6,7 @@ import { ChevronDown20Filled, ChevronUp20Filled } from '@fluentui/react-icons'
 import Logo from '@/images/logo.svg'
 import Menu from '@/images/menu.svg'
 import styles from './header.module.scss'
-import { UserContext } from '../../../app/contexts/UserContext'
+import {UserContext } from '../../../app/contexts/UserContext'
 import { useMePhoto } from '@/hooks/useMsGraphPhoto'
 import SignoutDropdown from './signoutDropdown/signoutDropdown'
 import {
@@ -109,7 +109,7 @@ export default function Header() {
                                         />
                                     ) : (
                                         user &&
-                                        `${user.firstName[0]}${user.lastName[0]}`
+                                        `${user?.firstName[0]}${user?.lastName[0]}`
                                     )}
                                 </div>
                                 <div className={styles.desktopSettings}>

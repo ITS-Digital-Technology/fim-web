@@ -1,72 +1,133 @@
-'use client'
+import useFetch from "@/hooks/useFetch";
+import { apiPath, baseUrl } from "@/src/apiConfig";
+import { User, Employment, WorkProfile } from "@/types/User";
+import {
+  createContext,
+  useMemo,
+  useState,
+  useContext,
+  JSX,
+} from "react";
+import { AppContext } from "./AppContext";
+import { jwtDecode } from "@/utils/jwt";
 
-import { createContext, useContext, useEffect, useState, useMemo } from 'react'
-import { apiPath, baseUrl } from '../../apiConfig'
-// import { IPerson } from '../../types/Person'
-// import { jwtDecode } from '../../utils/jwt'
-import useFetch from '../../hooks/useFetch'
-import { AppContext } from './AppContext'
-
-interface UserContextProps {
-    user?: any
-    isLoading: boolean
+export interface UserContextProps {
+  user: User | undefined;
+  employment: Employment | undefined;
+  workProfile: WorkProfile | undefined;
+  fetchUserData: () => void;
+  fetchEmploymentData: () => void;
+  fetchWorkProfileData: () => void;
+  isLoading: boolean;
+  isError: boolean;
 }
 
-export const UserContext: React.Context<UserContextProps> = createContext<UserContextProps>(
-    {} as UserContextProps
-)
+export const UserContext = createContext<UserContextProps>(
+  {} as UserContextProps
+);
 
-const createUser = (claims: any, userDetails?: any): any => {
+export const UserProvider = ({ children }: { children: JSX.Element }) => {
+  const { MStoken } = useContext(AppContext);
+  const decodedJwt = jwtDecode(MStoken);
 
-    return {
-        nuid: userDetails?.nuid,
-        userId: userDetails?.userId,
-        firstName: userDetails.firstName,
-        lastName: userDetails.lastName,
-        email: userDetails?.email,
-        campusName: userDetails?.campusName
+  // 缓存数据
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const [employment, setEmployment] = useState<Employment | undefined>(undefined);
+  const [workProfile, setWorkProfile] = useState<WorkProfile | undefined>(undefined);
+
+  // Fetch Hooks
+  const {
+    fetchAPI: GetUserDetails,
+    isLoading: isUserLoading,
+    isError: isUserError,
+  } = useFetch<User>({
+    dataType: "json",
+    url: `${baseUrl}${apiPath.GetUserDetails}`,
+    disableAutoFetch: true, // 只在需要时请求
+  });
+
+  const {
+    fetchAPI: GetUserEmployment,
+    isLoading: isEmploymentLoading,
+    isError: isEmploymentError,
+  } = useFetch<Employment>({
+    dataType: "json",
+    url: `${baseUrl}${apiPath.Employment}`,
+    disableAutoFetch: true,
+  });
+
+  const {
+    fetchAPI: GetWorkProfile,
+    isLoading: isWorkProfileLoading,
+    isError: isWorkProfileError,
+  } = useFetch<WorkProfile>({
+    dataType: "json",
+    url: `${baseUrl}${apiPath.GetWorkProfile}`,
+    disableAutoFetch: true,
+  });
+
+  // **手动触发 Fetch，并缓存数据**
+  const fetchUserData = async () => {
+    if (!user) {
+      try {
+        const data = await GetUserDetails();
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
     }
-}
+  };
 
-export const UserProvider = ({ children }: any) => {
+  const fetchEmploymentData = async () => {
+    if (!employment) {
+      try {
+        const data = await GetUserEmployment();
+        setEmployment(data);
+      } catch (error) {
+        console.error("Error fetching employment details:", error);
+      }
+    }
+  };
 
-    // const { MStoken } = useContext(AppContext)
-     const decodedJwt = ''
+  const fetchWorkProfileData = async () => {
+    if (!workProfile) {
+      try {
+        const data = await GetWorkProfile();
+        setWorkProfile(data);
+        console.log("workProfileData:", workProfile);
 
-    const [user, setUser] = useState<any>()
+      } catch (error) {
+        console.error("Error fetching work profile:", error);
+      }
+    }
+  };
 
-    const { fetchAPI: getUserDetails, isLoading: isLoadingUser } = useFetch<string>({
-        dataType: 'json',
-        url: `${baseUrl}${apiPath.GetUserDetails}`,
-        disableAutoFetch: true,
-    })
+  // **合并 Context 数据**
+  const userProps: UserContextProps = useMemo(
+    () => ({
+      user,
+      employment,
+      workProfile,
+      fetchUserData,
+      fetchEmploymentData,
+      fetchWorkProfileData,
+      isLoading: isUserLoading || isEmploymentLoading || isWorkProfileLoading,
+      isError: isUserError || isEmploymentError || isWorkProfileError,
+    }),
+    [
+      user,
+      employment,
+      workProfile,
+      isUserLoading,
+      isEmploymentLoading,
+      isWorkProfileLoading,
+      isUserError,
+      isEmploymentError,
+      isWorkProfileError,
+    ]
+  );
 
-    useEffect(() => {
-        if (!user) {
-            getUserDetails().then(
-                resp => setUser(createUser(decodedJwt, resp))
-            )
-        }
-    },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [user]
-    )
-
-    const userProps: UserContextProps = useMemo (
-        () => ({
-            user,
-            isLoading: isLoadingUser
-            
-        }),
-        [
-            user,
-            isLoadingUser
-        ]
-    )
-
-    return (
-        <UserContext.Provider value={userProps}>
-            {children}
-        </UserContext.Provider>
-    )
-}
+  return (
+    <UserContext.Provider value={userProps}>{children}</UserContext.Provider>
+  );
+};

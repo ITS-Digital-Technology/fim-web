@@ -1,34 +1,34 @@
-import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { Inter } from "next/font/google";
+import React, { PropsWithChildren } from "react";
 import styles from "./globals.module.scss";
-import Header from '@/common/header/Header'
+import Header from "@/common/header/Header";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Fim Web",
-  description: "The fim project",
-};
+import App from "./app";
 
 // Footer needs to skip SSR, otherwise it breaks hydration
-const Footer = dynamic(() => import("@/components/footer/Footer"), {
-  ssr: false,
-  loading: () => <div>Loading...</div>,
-});
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="en">
-      <body className={styles.body}>
+export const metadata = {
+  title: "CX Dashboard",
+};
+
+const RootLayout: React.FC<PropsWithChildren> = (props) => (
+  <html lang="en">
+    <head>
+      {/* App Icons */}
+      <link rel="icon" href="/favicon.ico" sizes="32x32"></link>
+      <link rel="icon" href="/icon.svg" type="image/svg+xml"></link>
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png"></link>
+      <link rel="manifest" href="/manifest.webmanifest"></link>
+      <script>window.dataLayer = window.dataLayer || [];</script>
+    </head>
+    <body className={styles.body}>
+      <App>
         <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
-  );
-}
+
+        <main id="main">{props.children}</main>
+      </App>
+    </body>
+  </html>
+);
+
+export default RootLayout;

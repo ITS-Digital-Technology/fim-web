@@ -1,0 +1,9 @@
+@import "@/app/globals.module.scss";
+
+.dialogContainer {
+  .ms-Dialog-title {
+    color: $primary !important; // 让标题变蓝色
+    font-size: 20px;
+    font-weight: bold;
+  }
+}

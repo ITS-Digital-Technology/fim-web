@@ -1,69 +1,51 @@
-'use client';
+"use client";
 
+import MePageTitleBar from "../../common/myPageTitleBar/MePageTitleBar";
+import styles from "./MyBasics.module.scss";
+import BasicEntry from "../../common/myBasics/BasicEntry";
+import { Separator, Stack } from "@fluentui/react";
+import { useContext } from "react";
+import { UserContext } from "../../../app/contexts/UserContext";
+import ContentStack from "@/common/contentStack/contentStack";
 
-import MePageTitleBar from '../../common/myPageTitleBar/MePageTitleBar'
-import styles from './MyBasics.module.scss'
-import MyProfileStyles from './MyProfile.module.scss'
-import BasicEntry from '../../common/myBasics/BasicEntry'
-import { Icon, Separator, Stack } from '@fluentui/react'
-import { Fragment, useContext, useEffect, useMemo } from 'react'
-// import { MePageContext } from '@/app/contexts/MePageContext'
-// import MyProfileContext from '@/app/contexts/MyProfileContext'
-import {MockMeData} from '../../../mocks/User'
+export default function MyBasics() {
+  const { user, fetchUserData, isLoading, isError } = useContext(UserContext);
 
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
-export default function MyProfile() {
-    // const {
-    //     mePageData,
-    //     fetchMePageData,
-    //     fetchMePageDataError,
-    //     fetchMePageDataLodaing,
-    // } = useContext(MePageContext)
+  if (isError) {
+    return <p>Error loading data. Please try again later.</p>;
+  }
 
-    const mePageData = MockMeData
-   
-    return (
-   
-            <div >
-                {/* <div className={styles.main}> */}
-                <MePageTitleBar title="My Basics" />
-                View Only
-                <Stack
-                    className={`${styles.main} ${styles.hasBottomRow}`}
-                    role="list"
-                >
-                    <BasicEntry
-                        title="ID"
-                        content={[mePageData.id]}
-                    />
-                    <Separator />
-                    <BasicEntry
-                        title="Display Name"
-                        content={[mePageData.displayName]}
-                    />
-                     <BasicEntry
-                        title="First Name"
-                        content={[mePageData.firstName]}
-                    />
-                    <Separator />
-                    <BasicEntry
-                        title="Last Name"
-                        content={[mePageData.lastName]}
-                    />
-                    <Separator />
-                    <BasicEntry
-                        title="Prefix"
-                        content={[mePageData.prefix]}
-                    />
-                    <Separator />
-                    <BasicEntry
-                        title="Email"
-                        content={[mePageData.studentInfo.studentEmail]}
-                    />
-                </Stack>
-         
-                </div>
-            // </div>
-        
-    )
+  if (!user) {
+    return <p>No user data available.</p>;
+  }
+
+  return (
+    <>
+      <MePageTitleBar title="My Basics" />
+      <ContentStack className={`${styles.basics}`}>
+        View Only
+        <Separator />
+        <Stack className={`${styles.main} ${styles.hasBottomRow}`} role="list">
+          <BasicEntry title="ID" content={[user.nuId || "N/A"]} />
+          <Separator />
+          <BasicEntry
+            title="Display Name"
+            content={[user.displayName || "N/A"]}
+          />
+          <Separator />
+          <BasicEntry title="First Name" content={[user.firstName || "N/A"]} />
+          <Separator />
+          <BasicEntry title="Last Name" content={[user.lastName || "N/A"]} />
+          <Separator />
+          <BasicEntry title="Prefix" content={[user.prefix || "N/A"]} />
+          <Separator />
+          <BasicEntry title="Email" content={[user.email || "N/A"]} />
+        </Stack>
+      </ContentStack>
+    </>
+  );
 }

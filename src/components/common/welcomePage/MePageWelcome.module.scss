@@ -1,11 +1,37 @@
 @import "@/app/globals.module.scss";
 
-.main {
+.contentWrapper {
   max-width: 700px;
   margin: 0 auto;
   width: 100%;
 
   @include mobile-width() {
     width: 90vw;
+  }
+}
+
+.bottom {
+  width: auto;
+  height: 60px;
+  background-color: #ccf5f0;
+  display: flex;        
+  justify-content: flex-end; 
+  align-items: center;  
+  padding-right: 16px;  
+}
+
+.actionBtn {
+  @extend .primaryButton;
+  display: flex;
+  gap: 8px;
+
+  &:focus-visible {
+    padding: 7px 13px;
+    margin: 2px;
+    outline: transparent;
+    box-shadow: 0 0 0 2px $primary;
+    border: solid 1px $white;
+    border-radius: 4px;
+    inset: 10px;
   }
 }

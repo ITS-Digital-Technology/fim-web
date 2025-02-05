@@ -1,0 +1,226 @@
+@import "@/app/globals.module.scss";
+
+.mainWrapper {
+  min-height: 80px;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.stack {
+  margin: 15px;
+}
+
+.subContainer {
+  background-color: $mint;
+  padding: 15px;
+}
+
+.link {
+  margin-left: 12px;
+
+  a {
+    text-decoration: none;
+    color: $primary;
+    cursor: pointer;
+  }
+}
+
+.actionBtn {
+  @extend .primaryButton;
+  display: flex;
+  gap: 8px;
+
+  &:focus-visible {
+    padding: 7px 13px;
+    margin: 2px;
+    outline: transparent;
+    box-shadow: 0 0 0 2px $primary;
+    border: solid 1px $white;
+    border-radius: 4px;
+    inset: 10px;
+  }
+}
+
+.postAddSection {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  .inputRow {
+    margin: 5px 0;
+
+    .text {
+      margin: 10px 0;
+
+      .messageText {
+        font-size: calc(12rem / 16);
+        color: $gray-590;
+        margin-top: 5px;
+      }
+
+      .postFormTooltipIcon {
+        margin: 1px 5px;
+        font-size: calc(16rem / 16);
+        position: relative;
+      }
+    }
+
+    input:disabled {
+      opacity: 1;
+    }
+  }
+
+  .buttonSection {
+    display: block;
+    padding: 10px;
+    text-align: center;
+
+    .cancelButtonStyles {
+      background-color: $white;
+      color: $primary;
+      width: 120px;
+      margin: 0 15px;
+      height: 35px;
+      font-size: calc(16rem / 16);
+      letter-spacing: 0.2px;
+      border: none;
+    }
+
+    .okButtonStyles {
+      background-color: $primary;
+      color: $white;
+      padding: 0 30px;
+      margin: 0 15px;
+      height: 35px;
+      font-size: calc(16rem / 16);
+      letter-spacing: 0.2px;
+      border: none;
+    }
+
+    .actionButtonStyles {
+      color: $primary;
+      font-size: calc(14rem / 16);
+      letter-spacing: 0.2px;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+  }
+
+  .errorMessage {
+    color: $red-100;
+    font-size: calc(14rem / 16);
+  }
+
+  .blueLink {
+    text-decoration: none;
+    color: $primary;
+  }
+
+  .thumbnailContainer {
+    display: flex;
+    margin-top: 20px;
+
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .defaultThumbnail {
+    background: $teal;
+    color: $white;
+    font-size: calc(16rem / 16);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .defaultThumbnailIcon {
+      font-size: calc(22rem / 16);
+    }
+  }
+
+  .choiceGroup {
+    label {
+      span {
+        -webkit-text-size-adjust: "none";
+        font-size: calc(14rem / 16);
+      }
+    }
+  }
+}
+
+.blogIcon {
+  font-size: calc(22rem / 16);
+  color: $white;
+}
+
+.blogIconGray {
+  font-size: calc(14rem / 16);
+  color: $gray-590;
+  margin-top: 3px;
+}
+
+.myblog {
+  padding: 10px 20px 15px;
+}
+
+.commandBarStyles {
+  padding: 0px;
+  height: 30px;
+  margin: 3px 0px 0px;
+}
+
+.imageWrapperStack {
+  width: 76px;
+  height: 76px;
+  color: $white;
+  background-color: $teal;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.addBlogModal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $primary;
+  padding: 0px 1rem;
+}
+
+.closeIcon {
+  @include font(calc(20rem / 16), $black, calc(24rem / 16), 600);
+}
+
+.addBlogModalHeader {
+  font-size: calc(22rem / 16);
+  font-weight: 600;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.addBlogModalScrollableContent {
+  max-width: 575px;
+  width: 90vw;
+  max-height: 80vh;
+}
+
+.postAuthor {
+  @include font(calc(12rem / 16), $gray-590, calc(20rem / 16), 400);
+}
+
+.syncIcon {
+  cursor: pointer;
+}
+
+.fieldsetNoBorder {
+  border: none;
+}

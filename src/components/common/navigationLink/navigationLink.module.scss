@@ -1,0 +1,13 @@
+@import "@/app/globals.module.scss";
+
+.navLink {
+  text-decoration: none;
+  color: $black;
+  font-size: 14px;
+  width: 100%;
+
+  &[aria-current="true"] {
+    color: $primary;
+    font-weight: 700;
+  }
+}
