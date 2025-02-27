@@ -1,66 +1,127 @@
-@import './globals.module.scss';
-
+@import "./globals.module.scss";
 
 .main {
-    margin-top: 70px;
+  margin-top: 70px;
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  padding-bottom: 64px;
+
+  @include tablet-width-or-zoom() {
+    flex-direction: column;
+  }
+
+  .profileAndNav {
     display: flex;
+    flex-direction: row;
     gap: 32px;
-    width: 100%;
-    padding-bottom: 64px;
+    width: 420px;
 
     @include tablet-width-or-zoom() {
-        flex-direction: column;
+      margin: 0 auto;
+      width: auto;
     }
 
-    .profileAndNav {
-        display: flex;
-        flex-direction: row;
-        gap: 32px;
-        width: 420px;
-
-        @include tablet-width-or-zoom() {
-            margin: 0 auto;
-            width: auto;
-        }
-
-        @include mobile-width() {
-            gap: 16px;
-        }
-
-        .profile {
-            display: flex;
-            flex-direction: column;
-            width: 190px;
-            gap: 24px;
-        }
-        .text{
-            margin: 0 10px;
-            @include font(16px, $black, 24px, 400);
-        }
-
-        .studentGreeting {
-            gap: 5px;
-            margin-bottom: 24px;
-
-            @include font(16px, $black, 24px, 400);
-
-            .studentName {
-                @include font(28px, $black, 20px, 600);
-            }
-        }
-        
+    @include mobile-width() {
+      gap: 16px;
     }
 
-    .contentWrapper {
-        max-width: 700px;
-        margin: 0 auto;
+    .profile {
+      display: flex;
+      flex-direction: column;
+      width: 190px;
+      gap: 24px;
+    }
+    .text {
+      margin: 0 10px;
+      @include font(16px, $black, 24px, 400);
+    }
+
+    .studentGreeting {
+      gap: 5px;
+      margin-bottom: 24px;
+
+      @include font(16px, $black, 24px, 400);
+
+      .studentName {
+        @include font(28px, $black, 20px, 600);
+      }
+    }
+
+    .btn {
+      border: none;
+      list-style: none; // 移除默认的列表样式
+
+      &.activeLink {
+        background-color: $white;
+        border-left: solid 2px $primary;
+        position: relative;
         width: 100%;
-    
-        @include mobile-width() {
-            width: 90vw;
+
+        .chevronButton {
+          color: $primary;
         }
+
+        button {
+          @include font(calc(16rem / 16), $primary, calc(44rem / 16), 700);
+        }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &:hover {
+        opacity: 0.6;
+      }
     }
+  }
+
+  .dropdownContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .chevronButton {
+    display: flex;
+    border: none;
+    background: none;
+    height: 44px;
+    width: 24px;
+    padding: 14px 4px;
+    margin-left: 8px;
+    cursor: pointer;
+  }
+
+  .subOptions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .subOptions li {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  .subOptions li:hover {
+    background-color: #e0e0e0;
+  }
+
+  .contentWrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+
+    @include mobile-width() {
+      width: 90vw;
+    }
+  }
 }
-
-
-//NavBar

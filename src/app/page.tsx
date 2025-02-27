@@ -6,9 +6,13 @@ import { ProfilePicture } from "@/common/profilePicture/ProfilePicture";
 import WorkProfile from "../components/common/myProfile/WorkProfile";
 import MyEmployment from "../components/common/myEmployment/MyEmployment";
 import MyBasics from "../components/common/myBasics/MyBasics";
-import MePageWelcome from '../components/common/welcomePage/MePageWelcome'
+import MePageWelcome from "../components/common/welcomePage/MePageWelcome";
 import { UserContext } from "./contexts/UserContext";
-
+import cn from "classnames";
+import {
+  ChevronRight16Regular,
+  ChevronUp16Regular,
+} from "@fluentui/react-icons";
 export default function Home() {
   const { fetchUserData, fetchEmploymentData, fetchWorkProfileData } =
     useContext(UserContext);
@@ -86,23 +90,60 @@ export default function Home() {
             Click on the image above to change your profile picture.
           </p>
         </div>
-        <div>
-          <button onClick={() => toggleExpand("userinfo")}>
-            General Information {expandedOption === "userinfo" ? "▲" : "▼"}
-          </button>
+        <div className={styles.subOptions}>
+          <div className={styles.dropdownContainer}>
+            <button
+              onClick={() => toggleExpand("userinfo")}
+              className={`${styles.dropdownBtn} ${
+                expandedOption === "userinfo" ? styles.activeLink : ""
+              }`}
+            >
+              General Information
+            </button>
+            <button
+              aria-controls="meBarSubMenu:userinfo"
+              aria-label="General Information Sub Menu"
+              aria-expanded={expandedOption === "userinfo"}
+              className={styles.chevronButton}
+              onClick={() => toggleExpand("userinfo")}
+            >
+              {expandedOption === "userinfo" ? (
+                <ChevronUp16Regular />
+              ) : (
+                <ChevronRight16Regular />
+              )}
+            </button>
+          </div>
+
           {expandedOption === "userinfo" && (
-            <div className={styles.subOptions}>
-              <button onClick={() => setSelectedChild("userinfo")}>
+            <ul className={styles.subOptions}>
+              <li
+                onClick={() => setSelectedChild("userinfo")}
+                className={`${styles.btn} ${
+                  selectedChild === "userinfo" ? styles.activeLink : ""
+                }`}
+              >
                 My Basics
-              </button>
-              <button onClick={() => setSelectedChild("employment")}>
+              </li>
+              <li
+                onClick={() => setSelectedChild("employment")}
+                className={`${styles.btn} ${
+                  selectedChild === "employment" ? styles.activeLink : ""
+                }`}
+              >
                 My Employment
-              </button>
-            </div>
+              </li>
+            </ul>
           )}
-          <button onClick={() => setSelectedChild("profile")}>
+
+          <li
+            onClick={() => setSelectedChild("profile")}
+            className={`${styles.btn} ${
+              selectedChild === "profile" ? styles.activeLink : ""
+            }`}
+          >
             My Profile
-          </button>
+          </li>
         </div>
       </div>
 

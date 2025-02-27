@@ -20,18 +20,18 @@ export default function SignoutModal({
 
   return (
     <DialogModalButton
-      dialogTitle="Log out"
+      dialogTitle="Sign out"
       dialogCloseAriaLabel="Close notification dialog."
-      buttonText="Log out"
+      buttonText="Sign out"
       buttonClassName={buttonClassName}
       testId="signout-modal-button"
-      actionButtonText="Log out"
+      actionButtonText="Sign out"
       actionButtonFn={handleLogout}
       cancelButtonText="Cancel"
       onDialogClosed={closeDropdown}
       centerContent
     >
-      <p>Are you sure you want to log out?</p>
+      <p>Are you sure you want to sign out?</p>
     </DialogModalButton>
   );
 }
