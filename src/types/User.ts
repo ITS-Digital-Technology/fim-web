@@ -32,4 +32,5 @@ export type WorkProfile = {
   links: any;
   articles: any;
   labWebsites: any;
+  programs:any
 };

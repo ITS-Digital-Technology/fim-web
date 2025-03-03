@@ -344,7 +344,6 @@ export const PostForm = (props: IPostFormProps) => {
             disabled={isSubmitDisabled}
             className={styles.okButtonStyles}
             onClick={onSubmit}
-            data-gtm-sh-my-posts-save-post={true}
           >
             Add
           </ActionButton>

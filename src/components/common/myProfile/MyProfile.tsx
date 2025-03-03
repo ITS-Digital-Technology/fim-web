@@ -6,9 +6,10 @@ import { Separator, Stack, PrimaryButton, TextField } from "@fluentui/react";
 import ContentStack from "@/common/contentStack/contentStack";
 import BiographyDialog from "./BiographyDialog";
 import MePageTitleBar from "../../common/myPageTitleBar/MePageTitleBar";
+import { Edit12Regular } from "@fluentui/react-icons";
 
 const MyProfile = () => {
-  const { workProfile, user } = useContext(UserContext); 
+  const { workProfile, user } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   const [isBiographyOpen, setIsBiographyOpen] = useState(false);
   const [isActivitiesOpen, setIsActivitiesOpen] = useState(false);
@@ -80,7 +81,7 @@ const MyProfile = () => {
                 setEditValues({ ...editValues, biography: newValue || "" })
               }
               multiline
-              rows={4} 
+              rows={4}
             />
             <Separator />
             <TextField
@@ -93,11 +94,13 @@ const MyProfile = () => {
                 })
               }
               multiline
-              rows={4} 
+              rows={4}
             />
             <Separator />
-            <PrimaryButton onClick={handleSave}>Save</PrimaryButton>
-            <PrimaryButton onClick={closeEditForm}>Cancel</PrimaryButton>
+            <div className={styles.editBtn}>
+            <button className={styles.resetBtn} onClick={closeEditForm}>Reset</button>
+              <button className={styles.actionBtn} onClick={handleSave}>Save</button>    
+            </div>
           </>
         ) : (
           <>
@@ -140,7 +143,6 @@ const MyProfile = () => {
           </>
         )}
 
-        {/* Biography Dialog */}
         <BiographyDialog
           hidden={!isBiographyOpen}
           onDismiss={() => setIsBiographyOpen(false)}
@@ -150,7 +152,6 @@ const MyProfile = () => {
           }}
         />
 
-        {/* Activities Dialog */}
         <BiographyDialog
           hidden={!isActivitiesOpen}
           onDismiss={() => setIsActivitiesOpen(false)}
@@ -160,25 +161,17 @@ const MyProfile = () => {
           }}
         />
 
-        {/* Edit Button */}
         {!isEditFormOpened && (
-          <div className={styles.addLocationContainer}>
+          <div className={styles.subContainer}>
             <div>
-              <PrimaryButton
-                iconProps={{
-                  iconName: "Edit",
-                  styles: { root: { color: "white" } },
-                }}
-                className={styles.addLocationButton}
-                styles={{
-                  root: {
-                    width: "50px !important",
-                    minWidth: "50px",
-                  },
-                }}
+              <button
                 onClick={openEditForm}
-                ariaLabel={`edit`}
-              />
+                className={styles.actionBtn}
+                aria-label="Add a link button"
+                data-gtm-sh-my-posts-add-post={true}
+              >
+                Edit <Edit12Regular />
+              </button>
             </div>
           </div>
         )}

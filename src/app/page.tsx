@@ -51,10 +51,14 @@ export default function Home() {
   }, [selectedChild, fetchUserData, fetchEmploymentData, fetchWorkProfileData]);
 
   const toggleExpand = (option: string) => {
-    setExpandedOption(expandedOption === option ? null : option);
-    setSelectedChild(null);
+    if (expandedOption === option) {
+      setExpandedOption(null);
+      setSelectedChild(null);
+    } else {
+      setExpandedOption(option);
+      setSelectedChild(null);
+    }
   };
-
   const renderContent = () => {
     if (selectedChild === "userinfo") {
       return <MyBasics />;
@@ -65,7 +69,6 @@ export default function Home() {
     if (selectedChild === "profile") {
       return <WorkProfile />;
     }
-
     return (
       <div className={styles.defaultContent}>
         {/* <img
@@ -93,8 +96,11 @@ export default function Home() {
         <div className={styles.subOptions}>
           <div className={styles.dropdownContainer}>
             <button
-              onClick={() => toggleExpand("userinfo")}
-              className={`${styles.dropdownBtn} ${
+              onClick={() => {
+                toggleExpand("userinfo");
+                setSelectedChild(null); 
+              }}
+              className={`${styles.btn} ${
                 expandedOption === "userinfo" ? styles.activeLink : ""
               }`}
             >

@@ -45,6 +45,54 @@
     }
   }
 }
+.subContainer {
+  background-color: $mint;
+  display: flex;
+  padding: 15px;
+  justify-content: flex-end;
+}
+
+.editBtn {
+  display: flex;
+  padding: 15px;
+  justify-content: flex-end;
+}
+
+.actionBtn {
+  @extend .primaryButton;
+  gap: 8px;
+  margin-left: 10px;
+  &:focus-visible {
+    padding: 7px 13px;
+    margin: 2px;
+    outline: transparent;
+    box-shadow: 0 0 0 2px $primary;
+    border: solid 1px $white;
+    border-radius: 4px;
+    inset: 10px;
+  }
+}
+
+.resetBtn {
+  @extend .primaryButton;
+  gap: 8px;
+  background-color: $white;
+  color: $primary;
+  text-decoration: none;
+
+  &:focus-visible {
+    padding: 7px 13px;
+    margin: 2px;
+    outline: transparent;
+    border-radius: 4px;
+    inset: 10px;
+  }
+  &:hover {
+    background-color: $gray-300;
+    text-decoration: none;
+    border: solid 1px $white;
+  }
+}
 
 .basics {
   label,

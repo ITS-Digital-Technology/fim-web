@@ -79,5 +79,13 @@ export const MockProfileWork = {
           "target": "Same Window",
           "iconUrl": null
       }
+  ],
+  "programs": [
+      {
+          "linkText": "Lab Website Link",
+          "url": "https://www.lab.com",
+          "target": "Same Window",
+          "iconUrl": null
+      }
   ]
 }

@@ -14,46 +14,34 @@ export default function MePageWelcome() {
   if (!user) return null;
   return (
     <div className={styles.contentWrapper}>
-      {/* 只显示 MyBasics */}
       {activeSection === "basics" && (
         <>
-          {/* <MePageTitleBar title="My Basics" /> */}
           <MyBasics />
-          <button 
-            className={styles.actionBtn} 
-            onClick={() => setActiveSection(null)}
-          >
-            Back
-          </button>
         </>
       )}
 
       {activeSection === "employment" && (
         <>
           <MyEmployment />
-          <button 
-            className={styles.actionBtn} 
-            onClick={() => setActiveSection(null)}
-          >
-            Back
-          </button>
         </>
       )}
 
       {!activeSection && (
         <>
-          {/* My Basics */}
           <MePageTitleBar title="My Basics" />
           <ContentStack className={styles.basics}>
-            <Stack className={`${styles.main} ${styles.hasBottomRow}`} role="list">
+            <Stack
+              className={`${styles.main} ${styles.hasBottomRow}`}
+              role="list"
+            >
               <BasicEntry title="ID" content={[user.nuId]} />
               <Separator />
               <BasicEntry title="Display Name" content={[user.displayName]} />
               <Separator />
               <BasicEntry title="Email" content={[user.email]} />
               <div className={styles.bottom}>
-                <button 
-                  className={styles.actionBtn} 
+                <button
+                  className={styles.actionBtn}
                   onClick={() => setActiveSection("basics")}
                 >
                   View All
@@ -64,7 +52,10 @@ export default function MePageWelcome() {
 
           <MePageTitleBar title="My Employment" />
           <ContentStack className={styles.basics}>
-            <Stack className={`${styles.main} ${styles.hasBottomRow}`} role="list">
+            <Stack
+              className={`${styles.main} ${styles.hasBottomRow}`}
+              role="list"
+            >
               <BasicEntry title="Employment Type" content={[user.nuId]} />
               <Separator />
               <BasicEntry title="Academic Title" content={[user.displayName]} />
@@ -73,8 +64,8 @@ export default function MePageWelcome() {
               <Separator />
               <BasicEntry title="City" content={[user.email]} />
               <div className={styles.bottom}>
-                <button 
-                  className={styles.actionBtn} 
+                <button
+                  className={styles.actionBtn}
                   onClick={() => setActiveSection("employment")}
                 >
                   View All
